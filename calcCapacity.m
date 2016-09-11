@@ -26,16 +26,15 @@ end
 function alphaCross = calcAlphaCross(road)
 a = 0.635;  % 减速加速度
 b = 1.66;   % 加速加速度
+n = road.nCross;   % 交叉口个数
 if road.type == 1 % 小区内部道路
   v = road.v;
   va = road.vmin;
   l = road.length;
-  n = 1; % 交叉口个数 TODO
   alphaCross = (l / v) / ( (l/v) + (1/a + 1/b) * ( (-1 * n / (2*v)) * (v * v - va * va) + n * (v - va)));
 elseif road.type == 2   % 小区周边道路，有信号灯
   v = road.v;
   l = road.length;
-  n = 1;
   time = road.waitTime;
   alphaCross =  (l / v) / ( (l/v)  + n * (v / (2*a) + v / (2 * b) + time));
 else
